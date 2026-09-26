@@ -14,10 +14,6 @@
     <div class="no-scrollbar flex flex-1 flex-col overflow-y-auto duration-300 ease-linear">
         <nav x-data="{ selected: 'Dashboard' }">
             <div>
-                <h3 class="mb-4 text-xs leading-5 text-gray-400 uppercase">
-                    <span :class="sidebarToggle ? 'xl:hidden' : ''">Menu</span>
-                </h3>
-
                 <ul class="mb-6 flex flex-col gap-1">
                     <li>
                         <a href="{{ route('dashboard') }}"
@@ -35,32 +31,102 @@
                 </ul>
             </div>
 
-            {{-- Placeholder grup fitur — diisi menyusul, jangan dihapus --}}
-            @foreach (['Master' => ['Produk', 'Supplier', 'Pelanggan'], 'Transaksi' => ['Penjualan', 'Pembelian'], 'Laporan' => ['Laporan Stok', 'Laporan Keuangan']] as $group => $items)
-                <div>
-                    <h3 class="mb-4 text-xs leading-5 text-gray-400 uppercase">
-                        <span :class="sidebarToggle ? 'xl:hidden' : ''">{{ $group }}</span>
-                    </h3>
-                    <ul class="mb-6 flex flex-col gap-1" :class="sidebarToggle ? 'xl:hidden' : ''">
-                        @foreach ($items as $item)
+            {{-- Menu Dropdown Groups --}}
+            @php
+                $menuGroups = [
+                    'Master' => [
+                        'icon' => 'M4 4h7v7H4V4zm11 0h5v5h-5V4zm-4 9H4v7h7v-7zm4 4h5v3h-5v-3z',
+                        'items' => [
+                            [
+                                'title' => 'Kategori',
+                                'route' => 'category',
+                            ],
+                            'Produk',
+                            'Supplier',
+                        ],
+                    ],
+                    'Transaksi' => [
+                        'icon' => 'M7 4v16m0 0l-4-4m4 4l4-4m6 4V4m0 0l4 4m-4-4l-4 4',
+                        'items' => ['Penjualan', 'Pembelian'],
+                    ],
+                    'Laporan' => [
+                        'icon' => '<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>',
+                        'items' => ['Laporan Stok', 'Laporan Keuangan'],
+                    ],
+                ];
+            @endphp
+
+            @foreach ($menuGroups as $group => $data)
+                <div x-data="{ open: false }" class="mb-1">
+
+                    {{-- Menu Group --}}
+                    <button type="button" @click="open = !open"
+                        class="menu-item group menu-item-inactive flex w-full items-center justify-between text-left">
+                        {{-- Icon + Label --}}
+                        <div class="flex min-w-0 items-center gap-3">
+                            <svg class="menu-item-icon-inactive shrink-0" width="22" height="22"
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {!! $data['icon'] !!}
+                            </svg>
+
+                            <span :class="sidebarToggle ? 'xl:hidden' : ''" class="flex-1 truncate">
+                                {{ $group }}
+                            </span>
+                        </div>
+
+                        {{-- Dropdown Arrow --}}
+                        <svg :class="[
+                            open ? 'rotate-180 text-brand-500' : 'text-gray-400',
+                            sidebarToggle ? 'xl:hidden' : ''
+                        ]"
+                            class="h-5 w-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 9.5L12 14.5L17 9.5" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    {{-- Dropdown Items --}}
+                    <ul x-show="open" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 -translate-y-1"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 -translate-y-1" class="mt-1 flex flex-col gap-1 pl-[34px]"
+                        :class="sidebarToggle ? 'xl:hidden' : ''" style="display: none;">
+                        @foreach ($data['items'] as $item)
                             <li>
-                                <span class="menu-item group menu-item-inactive cursor-not-allowed opacity-60"
-                                    title="Fitur menyusul">
-                                    <svg class="menu-item-icon-inactive" width="22" height="22"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="3.5" y="3.5" width="17" height="17" rx="3"
-                                            stroke="currentColor" stroke-width="1.5" />
-                                    </svg>
-                                    <span class="flex-1">{{ $item }}</span>
+                                @if (is_array($item))
+                                    <a href="{{ route($item['route']) }}"
+                                        class="menu-item group menu-item-inactive flex items-center py-2 text-sm">
+                                        <span class="flex-1">
+                                            {{ $item['title'] }}
+                                        </span>
+                                    </a>
+                                @else
                                     <span
-                                        class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-500 dark:bg-white/10 dark:text-gray-400">Segera</span>
-                                </span>
+                                        class="menu-item group menu-item-inactive flex cursor-not-allowed items-center py-2 text-sm opacity-60"
+                                        title="Fitur menyusul">
+                                        <span class="flex-1">
+                                            {{ $item }}
+                                        </span>
+
+                                        <span
+                                            class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-500 dark:bg-white/10 dark:text-gray-400">
+                                            Segera
+                                        </span>
+                                    </span>
+                                @endif
                             </li>
                         @endforeach
                     </ul>
+
                 </div>
             @endforeach
-
             <div>
                 <h3 class="mb-4 text-xs leading-5 text-gray-400 uppercase">
                     <span :class="sidebarToggle ? 'xl:hidden' : ''">Akun</span>

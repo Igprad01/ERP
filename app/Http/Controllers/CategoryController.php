@@ -11,7 +11,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Master.`Category.index');
+        return view('Master.Category.index');
     }
 
     /**
