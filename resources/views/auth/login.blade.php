@@ -1,6 +1,6 @@
-<x-layouts::auth :title="__('Log in')">
+<x-layouts::auth.simple :title="__('Log in')">
     <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('Log in to your account')" :description="__('Enter your username and password below to log in')" />
+        <x-auth.auth-header :title="__('Log in to your account')" :description="__('Enter your username and password below to log in')" />
         <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
             @csrf
 
@@ -30,4 +30,4 @@
             </div>
         </form>
     </div>
-</x-layouts::auth>
+</x-layouts::auth.simple>
