@@ -18,8 +18,10 @@
     </script>
 </head>
 
-<body x-data="{ page: 'dashboard', loaded: true, darkMode: $persist(false), stickyMenu: false, sidebarToggle: false, scrollTop: false }" x-init="$watch('darkMode', value => { document.documentElement.classList.toggle('dark', value);
-    localStorage.setItem('darkMode', JSON.stringify(value)); })" :class="{ 'dark bg-gray-900': darkMode === true }"
+<body x-data="{ page: 'dashboard', loaded: true, darkMode: $persist(false), stickyMenu: false, sidebarToggle: false, scrollTop: false }" x-init="$watch('darkMode', value => {
+    document.documentElement.classList.toggle('dark', value);
+    localStorage.setItem('darkMode', JSON.stringify(value));
+})" :class="{ 'dark bg-gray-900': darkMode === true }"
     class="font-outfit bg-gray-50 text-gray-900 antialiased dark:bg-gray-900 dark:text-gray-100">
     <div class="flex h-screen overflow-hidden">
         @include('layouts.tailadmin.sidebar')
@@ -31,7 +33,7 @@
             @include('layouts.tailadmin.header', ['title' => $title ?? 'Dashboard'])
 
             <main class="flex-1">
-                <div class="mx-auto max-w-2xl p-4 md:p-6">
+                <div class="mx-auto w-full max-w-none p-4 md:p-6">
                     {{ $slot }}
                 </div>
             </main>
