@@ -41,8 +41,6 @@
                                 'title' => 'Kategori',
                                 'route' => 'category',
                             ],
-                            'Produk',
-                            'Supplier',
                         ],
                     ],
                     'Transaksi' => [
