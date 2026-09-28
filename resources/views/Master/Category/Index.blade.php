@@ -30,10 +30,9 @@
                             <td class="px-6 py-3">{{ $item->deskripsi }}</td>
                             <td class="px-6 py-3">
                                 <a href="{{ route('category.edit', $item->id) }}">Edit</a>
-                                <form action="{{ route('category.destroy', $item->id) }}" method="POST"
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Hapus</button>
+
+                                <form action="{{ route('category.destroy', $item->id) }}" method="POST" @csrf
+                                    @method('DELETE') <button type="submit" class="cursor-pointer">Delete</button>
                                 </form>
                             </td>
                         </tr>
