@@ -21,16 +21,20 @@
                         <th scope="col" class="px-6 py-3">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                     @foreach ($viewkategori as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->warna }}</td>
-                            <td>{{ $item->deskripsi }}</td>
-                            <td>
-                                <a href="#">Edit</a>
-                                <a href="#">Hapus</a>
+                            <td class="px-6 py-3">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-3">{{ $item->nama }}</td>
+                            <td class="px-6 py-3">{{ $item->warna }}</td>
+                            <td class="px-6 py-3">{{ $item->deskripsi }}</td>
+                            <td class="px-6 py-3">
+                                <a href="{{ route('category.edit', $item->id) }}">Edit</a>
+                                <form action="{{ route('category.destroy', $item->id) }}" method="POST"
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

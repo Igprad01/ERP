@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\categoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -27,9 +28,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(categoryRequest $request)
     {
-        //
+        Category::add($request->validated());
+        return redirect()->route('category')->with('success', 'Category created successfully');
     }
 
     /**
@@ -45,7 +47,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $edit = Category::find($id);
+        return view('Master.Category.edit', compact('edit'));
     }
 
     /**
@@ -61,6 +64,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = Category::find($id);
+        $kategori->delete();
+        return redirect()->route('category')->with('success', 'Category deleted successfully');
     }
 }
