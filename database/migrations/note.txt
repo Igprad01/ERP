@@ -1,0 +1,7 @@
+Schema::create('trips', function (Blueprint $table) {
+           
+        });
+
+        Schema::table('trips', function (Blueprint $table){
+            $table->foreign('category_id')->references('id')->on('table_category')->onDelete('cascade');
+        });

@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
+use App\Models\Category;
+use App\Enums\Enums\Status;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $trip = Trip::view();
@@ -26,57 +25,43 @@ class TripController extends Controller
         return view('Transaksi.Trip.index', compact('trip'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('Transaksi.Trip.tambah');
+        $categories = Category::all();
+        $statuses = Status::status();
+        return view('Transaksi.Trip.tambah', compact('categories', 'statuses'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(TripRequest $request)
     {
-
         $trip = Trip::add($request->validated());
-        return response()->json([
-            'success' => true,
-            'message' => 'Data berhasil ditambahkan',
-            'data' => $trip,
-        ]);
+        return redirect()->route('trip')->with('success', 'Trip berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
-        //
+        $trip = Trip::findOrFail($id);
+        $categories = Category::all();
+        $statuses = Status::status();
+        return view('Transaksi.Trip.edit', compact('trip', 'categories', 'statuses'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
+    public function update(TripRequest $request, $id)
     {
-        //
+        $trip = Trip::findOrFail($id);
+        $trip->update($request->validated());
+        return redirect()->route('trip')->with('success', 'Trip berhasil diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        //
+        $trip = Trip::findOrFail($id);
+        $trip->delete();
+        return redirect()->route('trip')->with('success', 'Trip berhasil dihapus');
     }
 }

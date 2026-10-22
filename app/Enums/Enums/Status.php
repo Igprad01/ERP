@@ -4,11 +4,10 @@ namespace App\Enums\Enums;
 
 enum Status: string
 {
-    case selesai = 'Selesai';
-    case pending = 'Pending';
-    case on_progress = 'On Progress';
-    case belum_dikerjakan = 'Belum Dikerjakan';
-    case Coming_Soon = 'Coming Soon';
+    case Done = 'Done';
+    case Pending = 'Pending';
+    case Batal = 'Batal';
+    case BelumDijalankan = 'Belum Dijalankan';
 
     public static function status(): array
     {

@@ -50,6 +50,7 @@
                                 'title' => 'Trips',
                                 'route' => 'trip',
                             ],
+                            'Keuangan',
                         ],
                     ],
                     'Laporan' => [
