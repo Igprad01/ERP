@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\FinansialController;
 
 Route::redirect('/', 'login')->name('home');
 
@@ -26,3 +27,12 @@ route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->
 route::get('/trip', [TripController::class, 'index'])->name('trip');
 route::get('/trip/tambah', [TripController::class, 'create'])->name('trip.tambah');
 route::post('/trip/store', [TripController::class, 'store'])->name('trip.store');
+
+
+// finansial
+route::get('/finansial', [FinansialController::class, 'index'])->name('finansial');
+route::get('/finansial/create', [FinansialController::class, 'create'])->name('finansial.create');
+route::post('/finansial/store', [FinansialController::class, 'store'])->name('finansial.store');
+route::get('/finansial/edit/{id}', [FinansialController::class, 'edit'])->name('finansial.edit');
+route::put('/finansial/update/{id}', [FinansialController::class, 'update'])->name('finansial.update');
+route::delete('/finansial/delete/{id}', [FinansialController::class, 'destroy'])->name('finansial.destroy');

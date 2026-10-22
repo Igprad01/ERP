@@ -50,7 +50,10 @@
                                 'title' => 'Trips',
                                 'route' => 'trip',
                             ],
-                            'Keuangan',
+                            [
+                                'title' => 'Keuangan',
+                                'route' => 'finansial',
+                            ],
                         ],
                     ],
                     'Laporan' => [
