@@ -26,14 +26,33 @@
                         <tr>
                             <td class="px-6 py-3">{{ $loop->iteration }}</td>
                             <td class="px-6 py-3">{{ $item->nama }}</td>
-                            <td class="px-6 py-3">{{ $item->warna }}</td>
+                            <td class="px-6 py-3">
+                                <span class="inline-flex items-center gap-2">
+                                    <span
+                                        class="inline-block h-4 w-4 shrink-0 rounded-full border border-gray-200 dark:border-gray-700"
+                                        style="background-color: {{ $item->warna }}"></span>
+                                    <span>{{ $item->warna }}</span>
+                                </span>
+                            </td>
                             <td class="px-6 py-3">{{ $item->deskripsi }}</td>
                             <td class="px-6 py-3">
-                                <a href="{{ route('category.edit', $item->id) }}">Edit</a>
+                                <div class="flex items-center gap-2">
+                                    <a href="{{ route('category.edit', $item->id) }}"
+                                        class="text-amber-500 hover:text-amber-600 p-1">
+                                        <x-heroicon-o-pencil-square class="h-4 w-4" />
+                                    </a>
 
-                                <form action="{{ route('category.destroy', $item->id) }}" method="POST" @csrf
-                                    @method('DELETE') <button type="submit" class="cursor-pointer">Delete</button>
-                                </form>
+                                    <form action="{{ route('category.destroy', $item->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="cursor-pointer text-red-500 hover:text-red-600 p-1"
+                                            title="Delete">
+                                            <x-heroicon-o-trash class="h-4 w-4" />
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
