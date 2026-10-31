@@ -47,8 +47,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="cursor-pointer text-red-500 hover:text-red-600 p-1"
-                                            title="Delete">
+                                            class="cursor-pointer text-red-500 hover:text-red-600 p-1" title="Delete">
                                             <x-heroicon-o-trash class="h-4 w-4" />
                                         </button>
                                     </form>
