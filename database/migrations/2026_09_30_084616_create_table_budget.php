@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('table_budget', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('table_category')->nullOnDelete();
-            $table->foreignId('account_id')->constrained('table_account')->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('table_category')->nullOnDelete();
+            $table->foreignId('account_id')->nullable()->constrained('table_account')->nullOnDelete();
             $table->string('periode'); // daily/weekly/monthly/yearly
             $table->decimal('amount', 15, 2);
             $table->date('tanggal_mulai');

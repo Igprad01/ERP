@@ -22,14 +22,11 @@ return new class extends Migration
             $table->text('catatan')->nullable();
             $table->string('status');
             $table->timestamps();
-
-
-            
         });
 
         Schema::table('table_trip', function (Blueprint $table) {
-                $table->foreign('category_id')->references('id')->on('table_category')->onDelete('cascade');
-            });
+            $table->foreign('category_id')->references('id')->on('table_category')->onDelete('cascade');
+        });
     }
 
     /**

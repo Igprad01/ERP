@@ -1,5 +1,5 @@
 <x-layouts::tailadmin title="Tambah Kategori">
-    <x-card>
+    <x-card-table>
         <form action="{{ route('category.store') }}" method="POST">
             @csrf
             <div class="mb-6">
@@ -24,5 +24,5 @@
                 Tambah
             </button>
         </form>
-    </x-card>
+    </x-card-table>
 </x-layouts::tailadmin>

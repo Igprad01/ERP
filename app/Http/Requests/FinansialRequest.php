@@ -13,10 +13,8 @@ class FinansialRequest extends FormRequest
 
     public function rules(): array
     {
-        $id = $this->route('id');
-
         return [
-            'reference_number' => 'required|string|max:255|unique:finansials,reference_number' . ($id ? ",$id" : ''),
+            'reference_number' => 'nullable|string|max:255|unique:finansials,reference_number',
             'transaksi_date' => 'nullable|date',
             'transaksi_type' => 'required|in:income,expense,transfer',
             'account_id' => 'required|exists:table_account,id',
@@ -24,6 +22,7 @@ class FinansialRequest extends FormRequest
             'category_id' => 'required|exists:table_category,id',
             'goal_id' => 'nullable|exists:table_goal,id',
             'debt_id' => 'nullable|exists:table_debt,id',
+            'trip_id' => 'nullable|exists:table_trip,id',
             'periode' => 'required|in:daily,weekly,monthly,yearly',
             'status' => 'required|in:Done,Pending,Batal,Belum Dijalankan',
             'type' => 'required|in:income,expense',
@@ -36,8 +35,6 @@ class FinansialRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'reference_number.required' => 'Nomor referensi wajib diisi',
-            'reference_number.unique' => 'Nomor referensi sudah digunakan',
             'transaksi_date.date' => 'Format tanggal tidak valid',
             'transaksi_type.required' => 'Tipe transaksi wajib dipilih',
             'transaksi_type.in' => 'Tipe transaksi tidak valid',
@@ -50,6 +47,7 @@ class FinansialRequest extends FormRequest
             'category_id.exists' => 'Kategori tidak valid',
             'goal_id.exists' => 'Target tidak valid',
             'debt_id.exists' => 'Utang/piutang tidak valid',
+            'trip_id.exists' => 'Trip tidak valid',
             'periode.required' => 'Periode wajib dipilih',
             'periode.in' => 'Periode tidak valid',
             'status.required' => 'Status wajib dipilih',

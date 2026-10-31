@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->date('jatuh_tempo')->nullable();
             $table->string('status')->default('active'); // goalStatus_finansial: active=berjalan, complete=lunas
-            $table->foreignId('akun_id')->constrained('table_account')->nullOnDelete();
+            $table->foreignId('akun_id')->nullable()->constrained('table_account')->nullOnDelete();
             $table->text('catatan')->nullable();
             $table->timestamps();
             $table->softDeletes();
