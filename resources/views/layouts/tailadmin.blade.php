@@ -8,7 +8,7 @@
     </title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     @fonts
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/alert.js'])
     <script>
         try {
             if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
@@ -45,6 +45,22 @@
             </footer>
         </div>
     </div>
+
+    {{-- Auto-trigger session notifications via Alert Master --}}
+    @if ($alerts = array_filter([
+        'success' => session('success'),
+        'error' => session('error'),
+        'warning' => session('warning'),
+        'info' => session('info'),
+    ]))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                @foreach ($alerts as $type => $message)
+                    window.Alert?.{{ $type }}(@json($message));
+                @endforeach
+            });
+        </script>
+    @endif
 </body>
 
 </html>

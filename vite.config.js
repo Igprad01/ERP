@@ -12,6 +12,7 @@ export default defineConfig({
                 'resources/js/passkeys.js',
                 'resources/js/category.js',
                 'resources/js/trip.js',
+                'resources/js/alert.js',
             ],
             refresh: true,
             fonts: [
