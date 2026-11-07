@@ -9,6 +9,8 @@ enum Status: string
     case Batal = 'Batal';
     case BelumDijalankan = 'Belum Dijalankan';
 
+    case masihDijalankan = "Masih dijalankan";
+
     public static function status(): array
     {
         return array_map(fn($status) => $status->value, self::cases());

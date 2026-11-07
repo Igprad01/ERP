@@ -1,7 +1,7 @@
 <x-layouts::tailadmin title="Tambah Kategori">
     <x-card-table>
         <div class="mb-6 border-b border-gray-100 pb-4 dark:border-slate-800">
-            <h3 class="text-base font-semibold text-gray-900 dark:text-white">Tambah Master Kategori</h3>
+            <h3 class="text-base font-semibold text-gray-900 dark:text-white">Tambah Kategori</h3>
         </div>
         <form action="{{ route('category.store') }}" method="POST" class="space-y-5">
             @csrf

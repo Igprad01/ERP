@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
@@ -29,17 +30,25 @@ class Trip extends Model
 
     public static function add(array $array)
     {
-        $tanggal_mulai = $array['tanggal_mulai'];
+
+        $tanggal_mulai = $array['tanggal_mulai'] ?? now()->toDateString();
         $tanggal_akhir = $array['tanggal_akhir'];
 
         if ($tanggal_mulai > $tanggal_akhir) {
             return throw new \Exception('Tanggal mulai harus lebih kecil dari tanggal akhir');
         }
+
+
         return self::create($array);
     }
 
     public static function view()
     {
         return self::with('category')->oldest()->paginate(10);
+    }
+
+    public static function getstatus()
+    {
+        return Status::status();
     }
 }

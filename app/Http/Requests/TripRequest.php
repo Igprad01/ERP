@@ -21,6 +21,7 @@ class TripRequest extends FormRequest
             'lokasi' => 'nullable|string|max:255',
             'category_id' => 'required|exists:table_category,id',
             'orang' => 'nullable|string|max:255',
+            'estimasi_anggaran' => 'nullable|numeric|min:0',
             'catatan' => 'nullable|string',
             'status' => 'required|string|in:Done,Pending,Batal,Belum Dijalankan',
         ];

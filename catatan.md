@@ -5,3 +5,5 @@
 ## 2. nanti ada fitur hide, jadi untuk pemasukan dan pengeluaran nanti keluar detailnya sedangkan untuk fitur Budgeting trip nanti akan keluar beberapa aja.
 
 ## 3. nanti di crosscheck lagi dah fitur apa lagi di finansial.
+
+## https://share.gemini.google/5lZ2iLaIbAtT

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
 use App\Models\Category;
-use App\Enums\Enums\Status;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
@@ -28,8 +27,9 @@ class TripController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $statuses = Status::status();
-        return view('Transaksi.Trip.tambah', compact('categories', 'statuses'));
+        $status = Trip::getstatus();
+
+        return view('Transaksi.Trip.tambah', compact('categories', 'status'));
     }
 
     public function store(TripRequest $request)
@@ -47,8 +47,7 @@ class TripController extends Controller
     {
         $trip = Trip::findOrFail($id);
         $categories = Category::all();
-        $statuses = Status::status();
-        return view('Transaksi.Trip.edit', compact('trip', 'categories', 'statuses'));
+        return view('Transaksi.Trip.edit', compact('trip', 'categories'));
     }
 
     public function update(TripRequest $request, $id)

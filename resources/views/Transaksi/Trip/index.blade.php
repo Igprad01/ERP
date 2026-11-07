@@ -18,6 +18,7 @@
                         <th scope="col" class="px-6 py-3">Tanggal Berakhir</th>
                         <th scope="col" class="px-6 py-3"> Aktivitas</th>
                         <th scope="col" class="px-6 py-3">Lokasi</th>
+                        <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Aksi</th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@
                             <td class="px-6 py-3">{{ $item->tanggal_akhir }}</td>
                             <td class="px-6 py-3">{{ $item->aktivitas }}</td>
                             <td class="px-6 py-3">{{ $item->lokasi }}</td>
+                            <td class="px-6 py-3"></td>
                             <td class="px-6 py-3">
                                 <a href="#">Detail</a>
                                 <a href="#">Edit</a>
