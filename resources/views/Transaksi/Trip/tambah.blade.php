@@ -9,8 +9,7 @@
             <div>
                 <label for="aktivitas" class="mb-2 block text-sm font-bold text-gray-700 dark:text-slate-200">Nama
                     Trip</label>
-                <input type="text" name="aktivitas" id="aktivitas" value="{{ old('aktivitas') }}"
-                    maxlength="255"
+                <input type="text" name="aktivitas" id="aktivitas" value="{{ old('aktivitas') }}" maxlength="255"
                     placeholder="Contoh: Liburan ke Bali, Kunjungan Kerja Jogja"
                     class="h-[52px] w-full rounded-xl border border-gray-300 bg-white px-4 text-sm font-medium text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-white"
                     required>
@@ -44,8 +43,7 @@
                                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
-                    <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi') }}"
-                        maxlength="255"
+                    <input type="text" name="lokasi" id="lokasi" value="{{ old('lokasi') }}" maxlength="255"
                         placeholder="Cari tempat atau destinasi (contoh: Monas, Kuta Bali)..."
                         class="h-[52px] w-full rounded-xl border border-gray-300 bg-white pl-11 pr-28 text-sm font-medium text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-white"
                         autocomplete="off">
@@ -115,7 +113,8 @@
                 </div>
                 <div>
                     <label for="tanggal_akhir"
-                        class="mb-2 block text-sm font-bold text-gray-700 dark:text-slate-200">Estimasi Anggaran</label>
+                        class="mb-2 block text-sm font-bold text-gray-700 dark:text-slate-200">Estimasi
+                        Anggaran</label>
                     <input type="text" name="estimasi_anggaran" id="estimasi_anggaran" value=""
                         class="h-[52px] w-full rounded-xl border border-gray-300 bg-white px-4 text-sm font-medium text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-white"
                         required>
