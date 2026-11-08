@@ -112,12 +112,17 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="tanggal_akhir"
+                    <label for="estimasi_anggaran"
                         class="mb-2 block text-sm font-bold text-gray-700 dark:text-slate-200">Estimasi
                         Anggaran</label>
-                    <input type="text" name="estimasi_anggaran" id="estimasi_anggaran" value=""
+                    <input type="text" inputmode="numeric" name="estimasi_anggaran" id="estimasi_anggaran"
+                        value="{{ old('estimasi_anggaran') ? number_format((float) str_replace(',', '', old('estimasi_anggaran')), 0, '', ',') : '' }}"
+                        placeholder="0"
                         class="h-[52px] w-full rounded-xl border border-gray-300 bg-white px-4 text-sm font-medium text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-800 dark:bg-slate-900 dark:text-white"
                         required>
+                    @error('estimasi_anggaran')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="status"
