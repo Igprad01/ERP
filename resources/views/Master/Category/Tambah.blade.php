@@ -61,6 +61,6 @@
                 </button>
             </div>
         </form>
-        @vite('resources/js/category.js')
+        @vite(['resources/js/category.js', 'resources/js/alert.js'])
     </x-card-table>
 </x-layouts::tailadmin>
