@@ -454,4 +454,27 @@ document.addEventListener("DOMContentLoaded", () => {
             reverseGeocodeOSM(lat, lng);
         }
     }
+    
+    const inputAnggaran = document.getElementById("estimasi_anggaran");
+    if (inputAnggaran) {
+        const formatRupiah = (val) => {
+            const raw = val.replace(/\D/g, "");
+            if (!raw) return "";
+            return new Intl.NumberFormat("en-US").format(raw);
+        };
+
+        inputAnggaran.addEventListener("input", (e) => {
+            const cursorPosition = e.target.selectionStart;
+            const originalLength = e.target.value.length;
+
+            e.target.value = formatRupiah(e.target.value);
+
+            const newLength = e.target.value.length;
+            const diff = newLength - originalLength;
+            e.target.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+        });
+        if (inputAnggaran.value) {
+            inputAnggaran.value = formatRupiah(inputAnggaran.value);
+        }
+    }
 });

@@ -27,9 +27,8 @@ class TripController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $status = Trip::getstatus();
 
-        return view('Transaksi.Trip.tambah', compact('categories', 'status'));
+        return view('Transaksi.Trip.tambah', compact('categories'));
     }
 
     public function store(TripRequest $request)

@@ -19,6 +19,7 @@ class Trip extends Model
         'orang',
         'catatan',
         'status',
+        'estimasi_anggaran',
     ];
 
     protected $table = 'table_trip';
@@ -44,6 +45,7 @@ class Trip extends Model
 
     public static function view()
     {
+
         return self::with('category')->oldest()->paginate(10);
     }
 

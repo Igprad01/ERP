@@ -12,6 +12,16 @@ class TripRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('estimasi_anggaran') && is_string($this->estimasi_anggaran)) {
+            $cleaned = str_replace([',', '.'], '', $this->estimasi_anggaran);
+            $this->merge([
+                'estimasi_anggaran' => $cleaned !== '' ? $cleaned : null,
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         return [
