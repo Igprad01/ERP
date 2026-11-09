@@ -34,7 +34,6 @@ class Trip extends Model
 
         $tanggal_mulai = $array['tanggal_mulai'] ?? now()->toDateString();
         $tanggal_akhir = $array['tanggal_akhir'];
-
         if ($tanggal_mulai > $tanggal_akhir) {
             return throw new \Exception('Tanggal mulai harus lebih kecil dari tanggal akhir');
         }
@@ -52,5 +51,10 @@ class Trip extends Model
     public static function getstatus()
     {
         return Status::status();
+    }
+
+    public static function remove(string $id)
+    {
+        return self::find($id)->delete();
     }
 }

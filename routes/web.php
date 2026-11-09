@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\FinansialController;
+use App\Http\Controllers\ActivitiesController;
 
 Route::redirect('/', 'login')->name('home');
 
@@ -25,9 +26,16 @@ route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->
 // transaksi trips dan daily activity
 
 route::get('/trip', [TripController::class, 'index'])->name('trip');
-route::get('/trip/tambah', [TripController::class, 'create'])->name('trip.tambah');
+route::get('/trip/tambah', [TripController::class, 'create'])->name('Trip.tambah');
 route::post('/trip/store', [TripController::class, 'store'])->name('trip.store');
+route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
+route::put('/trip/update/{id}', [TripController::class, 'update'])->name('trip.update');
+route::delete('/trip/delete/{id}', [TripController::class, 'destroy'])->name('trip.destroy');
 
+//daily activity
+
+route::get('/activity/tambah/{trip_id}', [ActivitiesController::class, 'create'])->name('daily_activity.create');
+route::post('/activity/store', [ActivitiesController::class, 'store'])->name('daily_activity.store');
 
 // finansial
 route::get('/finansial', [FinansialController::class, 'index'])->name('finansial');

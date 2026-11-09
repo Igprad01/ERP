@@ -2,7 +2,7 @@
     <x-card-table>
         <div class="mb-4 flex items-center justify-between">
             <h1 class="text-xl font-bold text-gray-800 dark:text-white">Trip List</h1>
-            <a href="{{ route('trip.tambah') }}"
+            <a href="{{ route('Trip.tambah') }}"
                 class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600">
                 Tambah
             </a>
@@ -30,11 +30,25 @@
                             <td class="px-6 py-3">{{ $item->tanggal_akhir }}</td>
                             <td class="px-6 py-3">{{ $item->aktivitas }}</td>
                             <td class="px-6 py-3">{{ $item->lokasi }}</td>
-                            <td class="px-6 py-3"></td>
+                            <td class="px-6 py-3">{{ $item->status }}</td>
                             <td class="px-6 py-3">
-                                <a href="#">Detail</a>
-                                <a href="#">Edit</a>
-                                <a href="#">Delete</a>
+                                <div class="flex items-center gap-2">
+                                    <a href="{{ route('daily_activity.create', $item->id) }}"
+                                        class="text-blue-500 hover:text-blue-600 p-1"><x-heroicon-o-document-text
+                                            class="h-4 w-4" /></a>
+                                    <a href="{{ route('trip.index') }} "
+                                        class="text-amber-500 hover:text-amber-600 p-1">
+                                        <x-heroicon-o-pencil-square class="h-4 w-4" /></a>
+                                    <form action="{{ route('trip.destroy', $item->id) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="cursor-pointer text-red-500 hover:text-red-600 p-1" title="Delete">
+                                            <x-heroicon-o-trash class="h-4 w-4" />
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

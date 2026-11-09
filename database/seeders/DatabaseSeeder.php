@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // 1. Buat role Admin jika belum ada
+        $adminRole = Role::firstOrCreate(
+            ['name' => 'Admin'],
+            ['deskripsi' => 'Administrator dengan akses penuh ke seluruh modul sistem.']
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // 2. Buat akun User Admin untuk login
+        User::updateOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Administrator',
+                'password' => Hash::make('password'),
+                'role_id' => $adminRole->id,
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }

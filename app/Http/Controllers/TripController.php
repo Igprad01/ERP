@@ -12,7 +12,6 @@ class TripController extends Controller
     public function index(Request $request)
     {
         $trip = Trip::view();
-
         if ($request->ajax()) {
             return response()->json([
                 'success' => true,
@@ -28,19 +27,18 @@ class TripController extends Controller
     {
         $categories = Category::all();
 
-        return view('Transaksi.Trip.tambah', compact('categories'));
+        $status = Trip::getstatus();
+
+        return view('Transaksi.Trip.tambah', compact('categories', 'status'));
     }
 
     public function store(TripRequest $request)
     {
-        $trip = Trip::add($request->validated());
+        Trip::add($request->validated());
         return redirect()->route('trip')->with('success', 'Trip berhasil ditambahkan');
     }
 
-    public function show($id)
-    {
-        //
-    }
+    public function show($id) {}
 
     public function edit($id)
     {
@@ -58,8 +56,10 @@ class TripController extends Controller
 
     public function destroy($id)
     {
-        $trip = Trip::findOrFail($id);
-        $trip->delete();
-        return redirect()->route('trip')->with('success', 'Trip berhasil dihapus');
+        $delete = Trip::remove($id);
+        if ($delete) {
+            return redirect()->route('trip')->with('success', 'Trip berhasil dihapus');
+        }
+        return redirect()->route('trip')->with('error', 'Trip gagal dihapus');
     }
 }
